@@ -27,22 +27,12 @@ export default function LoginPage() {
 
       const data = await response.json();
 
-      // Debug: Log the response to check what's happening
-      console.log("Login response:", response);
-      console.log("Login data:", data);
-
       if (!response.ok) {
         throw new Error(data.error || "Login failed");
       }
 
-      // Debug: Log before navigation
-      console.log("Navigating to dashboard...");
-
-      // Use window.location.href for more reliable navigation
       window.location.href = "/dashboard";
 
-      // Alternative: Use router.push with a small delay
-      // setTimeout(() => router.push("/dashboard"), 100);
     } catch (err) {
       console.error("Login error:", err);
       setError(err instanceof Error ? err.message : "An error occurred");
