@@ -11,8 +11,6 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-    // reqres_5f88a1fddd0c4aaa8a4f6ae6dce2aa3d
-    // Call the external API from server-side (avoids CORS issues)
     const loginResponse = await fetch("https://reqres.in/api/login", {
       method: "POST",
       headers: {

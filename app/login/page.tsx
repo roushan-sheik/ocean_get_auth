@@ -2,10 +2,12 @@
 
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react"; // Import icons
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("eve.holt@reqres.in"); // Pre-filled for convenience
-  const [password, setPassword] = useState("cityslicka"); // Pre-filled for convenience
+  const [email, setEmail] = useState("eve.holt@reqres.in");
+  const [password, setPassword] = useState("cityslicka");
+  const [showPassword, setShowPassword] = useState(false); // State for password visibility
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -16,12 +18,9 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      // SIMPLIFIED: Make only one call to your own API route
       const response = await fetch("/api/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
@@ -31,8 +30,6 @@ export default function LoginPage() {
         throw new Error(data.error || "Login failed");
       }
 
-      // If login is successful, the API route has set the cookie.
-      // Redirect to the dashboard.
       router.push("/dashboard");
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
@@ -42,32 +39,30 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+    <div className="min-h-screen gradient-bg flex items-center justify-center p-4">
+      <div className="glass max-w-md w-full rounded-2xl p-8 shadow-2xl">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            Welcome Back
-          </h1>
-          <p className="text-gray-600">Sign in to your account</p>
+          <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
+          <p className="text-white/80">Sign in to your account</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+            <div className="bg-red-500/20 backdrop-blur border border-red-400/30 text-white px-4 py-3 rounded-lg">
               {error}
             </div>
           )}
 
-          <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg text-sm">
-            <p className="font-semibold mb-1">Test Credentials:</p>
-            <p>Email: eve.holt@reqres.in</p>
-            <p>Password: cityslicka</p>
+          <div className="glass p-4 rounded-lg">
+            <p className="font-semibold text-white mb-1">Test Credentials:</p>
+            <p className="text-white/80 text-sm">Email: eve.holt@reqres.in</p>
+            <p className="text-white/80 text-sm">Password: cityslicka</p>
           </div>
 
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="block text-sm font-medium text-white mb-2"
             >
               Email Address
             </label>
@@ -77,33 +72,43 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+              className="w-full px-4 py-3 bg-white/20 backdrop-blur border border-white/30 rounded-lg focus:ring-2 focus:ring-white/50 focus:border-transparent transition text-white placeholder-white/60"
               placeholder="Enter your email"
             />
           </div>
 
+          {/* --- CORRECTED PASSWORD FIELD --- */}
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="block text-sm font-medium text-white mb-2"
             >
               Password
             </label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
-              placeholder="Enter your password"
-            />
+            <div className="relative">
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full px-4 py-3 bg-white/20 backdrop-blur border border-white/30 rounded-lg focus:ring-2 focus:ring-white/50 focus:border-transparent transition text-white placeholder-white/60 pr-12"
+                placeholder="Enter your password"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-white/70 hover:text-white focus:outline-none"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r cursor-pointer from-purple-500 to-pink-500 text-white py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-transparent transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
