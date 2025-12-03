@@ -51,7 +51,7 @@ npm install
 npm run dev
 ```
 
-#### Application is running on this port
+#### Copy the link and heat on  browser 
 
 ```bash
 http://localhost:3000
