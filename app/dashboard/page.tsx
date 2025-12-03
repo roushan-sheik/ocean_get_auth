@@ -30,7 +30,6 @@ export default function DashboardPage() {
 
   const fetchUserData = async () => {
     try {
-      // Fixed: Call our own API route instead of external API directly
       const response = await fetch("/api/user");
       const data = await response.json();
 
@@ -51,12 +50,7 @@ export default function DashboardPage() {
       const response = await fetch("/api/logout", {
         method: "POST",
       });
-
-      // Debug: Log the response
-      console.log("Logout response:", response);
-
       if (response.ok) {
-        // Use window.location.href for more reliable navigation
         setTimeout(() => (window.location.href = "/"), 300);
       } else {
         throw new Error("Logout failed");
