@@ -30,7 +30,7 @@ export default function DashboardPage() {
 
   const fetchUserData = async () => {
     try {
-      // Fixed: Call our own API route instead of the external API directly
+      // Fixed: Call our own API route instead of external API directly
       const response = await fetch("/api/user");
       const data = await response.json();
 
@@ -52,12 +52,17 @@ export default function DashboardPage() {
         method: "POST",
       });
 
+      // Debug: Log the response
+      console.log("Logout response:", response);
+
       if (response.ok) {
-        router.push("/login");
+        // Use window.location.href for more reliable navigation
+        setTimeout(() => (window.location.href = "/"), 300);
       } else {
         throw new Error("Logout failed");
       }
     } catch (err) {
+      console.error("Logout error:", err);
       setError(err instanceof Error ? err.message : "Logout failed");
     }
   };

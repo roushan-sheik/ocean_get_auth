@@ -54,27 +54,6 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen gradient-bg flex items-center justify-center p-4">
       <div className="glass max-w-md w-full rounded-2xl p-8 shadow-2xl relative">
-        {/* Top-Left Arrow Button */}
-        <Link
-          href="/"
-          className="absolute top-4 left-4 glass p-2 rounded-full text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300"
-          aria-label="Go back to home"
-        >
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </Link>
-
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
           <p className="text-white/80">Sign in to your account</p>
