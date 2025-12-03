@@ -17,8 +17,8 @@ A secure authentication system built with Next.js App Router, featuring a glassm
 - Tailwind CSS 4: Utility-first CSS framework
 - Lucide React: Icon library for the UI
 
-
 ### Live Url:
+
 Open [https://ocean-get-auth.vercel.app/](https://ocean-get-auth.vercel.app) with your browser to see the dashboard.
 
 ## Setup Instructions
@@ -60,41 +60,40 @@ http://localhost:3000
 ## File and Folder Structure
 
 ```text
-.
-├── app
-│   ├── api
-│   │   ├── login
-│   │   │   └── route.ts
-│   │   ├── logout
-│   │   │   └── route.ts
-│   │   └── user
-│   │       └── route.ts
-│   ├── dashboard
-│   │   └── page.tsx
+..
+├── app/                          # Next.js App Router directory containing all pages and API routes
+│   ├── api/                      # API routes directory
+│   │   ├── login/                # Login API endpoint
+│   │   │   └── route.ts          # Handles user authentication and cookie setting
+│   │   ├── logout/               # Logout API endpoint
+│   │   │   └── route.ts          # Clears authentication cookie
+│   │   └── user/                 # User data API endpoint
+│   │       └── route.ts          # Fetches user data with authentication token
+│   ├── dashboard/                 # Dashboard page directory
+│   │   └── page.tsx              # Dashboard component displaying user information
 │   ├── favicon.ico
-│   ├── globals.css
-│   ├── layout.tsx
-│   ├── login
-│   │   └── page.tsx
-│   └── page.tsx
+│   ├── globals.css               # Global styles including glassmorphism effects
+│   ├── layout.tsx                # Root layout component for the entire application
+│   ├── login/                    # Login page directory
+│   │   └── page.tsx              # Login form component with glassmorphism design
+│   └── page.tsx                 # Home page component
 ├── eslint.config.mjs
-├── lib
+├── lib/                         # Library directory for utilities
 │   └── api-config.ts
-├── middleware.ts
+├── middleware.ts                 # Next.js middleware for route protection
 ├── next.config.ts
 ├── next-env.d.ts
 ├── package.json
 ├── package-lock.json
 ├── postcss.config.mjs
-├── public
+├── public/                      # Static assets directory
 │   ├── file.svg
 │   ├── globe.svg
 │   ├── next.svg
 │   ├── vercel.svg
 │   └── window.svg
-├── README.md
+├── README.md                    # Project documentation
 ├── tsconfig.json
-└── types
+└── types/                       # TypeScript type definitions directory
     └── index.ts
-
 ```
