@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 interface User {
   id: number;
@@ -93,7 +94,9 @@ export default function DashboardPage() {
       {/* Header */}
       <header className="glass border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-white">Dashboard</h1>
+          <h1 className="text-2xl font-bold text-white">
+            <Link href={"/"}>Dashboard</Link>
+          </h1>
           <button
             onClick={handleLogout}
             className="glass cursor-pointer text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent transition-all duration-300 transform hover:scale-105"
