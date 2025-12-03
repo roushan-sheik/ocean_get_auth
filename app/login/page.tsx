@@ -3,7 +3,7 @@
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Eye, EyeOff, Home } from "lucide-react"; // Import icons
+import { Eye, EyeOff, Home } from "lucide-react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("eve.holt@reqres.in");
@@ -27,12 +27,24 @@ export default function LoginPage() {
 
       const data = await response.json();
 
+      // Debug: Log the response to check what's happening
+      console.log("Login response:", response);
+      console.log("Login data:", data);
+
       if (!response.ok) {
         throw new Error(data.error || "Login failed");
       }
 
-      router.push("/dashboard");
+      // Debug: Log before navigation
+      console.log("Navigating to dashboard...");
+
+      // Use window.location.href for more reliable navigation
+      window.location.href = "/dashboard";
+
+      // Alternative: Use router.push with a small delay
+      // setTimeout(() => router.push("/dashboard"), 100);
     } catch (err) {
+      console.error("Login error:", err);
       setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setLoading(false);
@@ -41,7 +53,28 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen gradient-bg flex items-center justify-center p-4">
-      <div className="glass max-w-md w-full rounded-2xl p-8 shadow-2xl">
+      <div className="glass max-w-md w-full rounded-2xl p-8 shadow-2xl relative">
+        {/* Top-Left Arrow Button */}
+        <Link
+          href="/"
+          className="absolute top-4 left-4 glass p-2 rounded-full text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300"
+          aria-label="Go back to home"
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </Link>
+
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
           <p className="text-white/80">Sign in to your account</p>
