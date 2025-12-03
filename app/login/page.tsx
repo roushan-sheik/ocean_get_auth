@@ -2,12 +2,13 @@
 
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff } from "lucide-react"; // Import icons
+import Link from "next/link";
+import { Eye, EyeOff, Home } from "lucide-react"; // Import icons
 
 export default function LoginPage() {
   const [email, setEmail] = useState("eve.holt@reqres.in");
   const [password, setPassword] = useState("cityslicka");
-  const [showPassword, setShowPassword] = useState(false); // State for password visibility
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -77,7 +78,6 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* --- CORRECTED PASSWORD FIELD --- */}
           <div>
             <label
               htmlFor="password"
@@ -113,6 +113,17 @@ export default function LoginPage() {
             {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
+
+        {/* Home Button */}
+        <div className="mt-6 text-center">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 glass text-white px-6 py-2 rounded-lg font-semibold hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent transition-all duration-300 transform hover:scale-105"
+          >
+            <Home size={18} />
+            Back to Home
+          </Link>
+        </div>
       </div>
     </div>
   );
