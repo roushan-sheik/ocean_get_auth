@@ -1,4 +1,3 @@
-// API Configuration
 export const API_CONFIG = {
   BASE_URL: "https://reqres.in/api",
   API_KEY: "reqres_5f88a1fddd0c4aaa8a4f6ae6dce2aa3d",
